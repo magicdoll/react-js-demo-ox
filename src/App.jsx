@@ -245,7 +245,7 @@ const App = () => {
                     <li key={i} className="py-3 sm:py-4">
                       <div className="flex items-center">
                           <div className="flex-shrink-0">
-                              <img className="w-8 h-8 rounded-full" src="https://placehold.co/80x80" alt="Neil image" />
+                              <img className="w-8 h-8 rounded-full" src={item.linepic} alt="Neil image" />
                           </div>
                           <div className="flex-1 min-w-0 ms-4 text-left">
                               <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
