@@ -71,9 +71,11 @@ const App = () => {
         }
       }
       if (!arrUserSheet.length) {
-        const respinsert = await fnUserSheetConvertData(await axios.post(urlSheets, jsuserinfo))
-        console.log('insert', respinsert)
-        jsuserinfo.userinfo.id = respinsert[0].id
+        await axios.post(urlSheets, jsuserinfo).then((respuserinfo) => {
+          const respinsert = fnUserSheetConvertData(respuserinfo)
+          console.log('insert', respinsert)
+          jsuserinfo.userinfo.id = respinsert[0].id
+        })
       }
       else {
         jsuserinfo.userinfo.score = parseInt(arrUserSheet[0].score || 0)
@@ -202,7 +204,7 @@ const App = () => {
       <div className="min-w-[330px] max-w-[340px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 px-6 py-2">
         {/* logout */}
         <div className="flex justify-end px-4 pt-4">
-          <button onClick={() => { liff.logout(); window.location.reload(); }} className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+          <button onClick={() => { liff.logout(); liff.login(); }} className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
               <path d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z" />
             </svg>
