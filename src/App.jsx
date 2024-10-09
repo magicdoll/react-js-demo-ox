@@ -74,7 +74,7 @@ const App = () => {
         await axios.post(urlSheets, jsuserinfo).then((respuserinfo) => {
           const respinsert = fnUserSheetConvertData(respuserinfo)
           console.log('insert', respinsert)
-          jsuserinfo.userinfo.id = respinsert[0].id
+          jsuserinfo.userinfo.id = respinsert.id
         })
       }
       else {
