@@ -31,7 +31,7 @@ const App = () => {
           score: userinfo.score
         }
       }
-      axios.put(`${urlSheets}/${userinfo.id}` , jsuserinfo).then(() => { fnUserSheetGetdata(null) })
+      axios.put(`${urlSheets}/${userinfo.id}` , jsuserinfo).then(() => { setTimeout(() => { fnUserSheetGetdata(null) }, 2000) })
     }
   }, [score])
 
@@ -73,7 +73,6 @@ const App = () => {
       if (!arrUserSheet.length) {
         await axios.post(urlSheets, jsuserinfo).then((respuserinfo) => {
           const respinsert = fnUserSheetConvertData(respuserinfo)
-          console.log('insert', respinsert)
           jsuserinfo.userinfo.id = respinsert.id
         })
       }
@@ -86,7 +85,8 @@ const App = () => {
     }
     
     /* process rank */
-    const arrUserSheetSort = arrUserSheet.sort((a, b) => parseInt(b.score) - parseInt(a.score)).slice(0,5)
+    const arrUserSheetSort = await arrUserSheet.sort((a, b) => parseInt(b.score) - parseInt(a.score)).slice(0,5)
+    console.log('arrUserSheetSort', arrUserSheetSort)
     setArrRank(arrUserSheetSort)
   }
   const fnUserSheetConvertData = (resp) => {
