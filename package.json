@@ -9,6 +9,7 @@
     "preview": "vite preview --port 3366"
   },
   "dependencies": {
+    "@line/liff": "^2.24.0",
     "@reduxjs/toolkit": "^2.2.8",
     "axios": "^1.7.7",
     "path": "^0.12.7",

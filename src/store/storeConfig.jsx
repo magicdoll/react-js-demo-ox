@@ -3,16 +3,17 @@ import { createSlice, configureStore } from "@reduxjs/toolkit"
 const initialState = {
   systemname: 'DemoOX',
   userinfo: {
-    lineid: ''
-    , linename: 'กรุณารอสักครู่...'
-    , linestatus: 'งั่มๆแง่มๆ'
-    , linepic: 'https://placehold.co/400x400'
-    , score: 0
+    linetoken: '',
+    lineid: '',
+    linename: '....XXXX....',
+    linestatus: '..xx..',
+    linepic: 'https://placehold.co/400x400',
+    score: 0,
+    winarow: 0
   } ,
   isBattle: false,
   isRank: false,
   turnPlayer: true,
-  winarow: 0,
   playerColor: 'pink',
   botColor: 'green',
   arrgameox: [
@@ -45,7 +46,7 @@ const storeConfig = createSlice({
       state.turnPlayer = payload
     },
     setWinaRow(state, { payload }) {
-      state.winarow = (payload <= 0 ? 0 : state.winarow++)
+      state.userinfo.winarow = (payload <= 0 ? 0 : state.userinfo.winarow++)
     },
     setPlayerColor(state, { payload }) {
       state.playerColor = ''
