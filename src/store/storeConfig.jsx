@@ -3,19 +3,20 @@ import { createSlice, configureStore } from "@reduxjs/toolkit"
 const initialState = {
   systemname: 'DemoOX',
   userinfo: {
+    id: 0,
     linetoken: '',
     lineid: '',
-    linename: '....XXXX....',
-    linestatus: '..xx..',
+    linename: '........',
+    linestatus: '....',
     linepic: 'https://placehold.co/400x400',
-    score: 0,
-    winarow: 0
+    score: 0
   } ,
   isBattle: false,
   isRank: false,
   turnPlayer: true,
   playerColor: 'pink',
   botColor: 'green',
+  winarow: 0,
   arrgameox: [
     { box: '1', chkby: '' },
     { box: '2', chkby: '' },
@@ -30,23 +31,24 @@ const initialState = {
 }
 
 const storeConfig = createSlice({
-  name: 'reactrmh',
+  name: 'reactdemoox',
   initialState: initialState,
   reducers: {
     setUserInfo(state, { payload }) {
       state.userinfo = payload
     },
-    setIsBattle(state, { payload }) {
-      state.isBattle = payload
-    },
-    setIsRank(state, { payload }) {
-      state.isRank = payload
-    },
     setTurnPlayer(state, { payload }) {
       state.turnPlayer = payload
     },
     setWinaRow(state, { payload }) {
-      state.userinfo.winarow = (payload <= 0 ? 0 : state.userinfo.winarow++)
+      state.winarow = (payload <= 0 ? 0 : state.winarow++)
+      if (state.winarow >= 3) {
+        state.userinfo.score += 2
+        state.winarow = 0
+      }
+      else {
+        state.userinfo.score += (state.userinfo.score >= 0 ? payload : 0)
+      }
     },
     setPlayerColor(state, { payload }) {
       state.playerColor = ''
@@ -83,7 +85,7 @@ const storeConfig = createSlice({
   }
 })
 
-export const { setUserInfo, setIsBattle, setIsRank, setTurnPlayer, setWinaRow, setPlayerColor, setPlayOX, setClearArrOX } = storeConfig.actions
+export const { setUserInfo, setTurnPlayer, setWinaRow, setPlayerColor, setPlayOX, setClearArrOX } = storeConfig.actions
 export default configureStore({
   reducer: storeConfig.reducer
 })
