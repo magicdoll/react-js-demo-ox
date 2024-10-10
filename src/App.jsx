@@ -9,6 +9,7 @@ const App = () => {
   const dispatch = useDispatch()
   const liffidG = '2006433189-Bb8W3M0d'
   const urlSheets = 'https://api.sheetbest.com/sheets/0cd97f0d-00cb-490c-a68a-79c0346fb722'
+  const isNotLogin = false /* true [เอาไว้เทสเล่น] : ระบบจะไม่ทำการ loin line และไม่ยิง googel sheet */
 
   const [isBattle, setIsBattle] = useState(false)
   const [isRank, setIsRank] = useState(false)
@@ -31,7 +32,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (userinfo.lineid) {
+    if (userinfo.lineid && !isNotLogin) {
       axios.put(`${urlSheets}/lineid/${userinfo.lineid}` , userinfo).then(() => { setTimeout(() => { fnUserSheetGetdata(null); }, 2000) })
     }
   }, [score])
@@ -44,10 +45,10 @@ const App = () => {
 
   const fnInitLine = () => {
     liff.init({ liffId: liffidG }, () => {
-      if (!liff.isLoggedIn()) {
+      if (!liff.isLoggedIn() && !isNotLogin) {
         liff.login()
       }
-      else {
+      else if (!isNotLogin) {
         fnSetUserinfo()
       }
     })

@@ -1,6 +1,9 @@
 # React + Vite + Tailwind
 
-เLink Demo OX (tic tac toe) : https://react-js-demo-ox.vercel.app
+หลังจาก clone ถ้าจะเทสแบบไม่ login line ให้ไป set isNotLogin = true
+set isNotLogin = true คือการเอาไว้เทสเล่นเกมอย่างเดียว ไม่ยุ่งการ line login และข้อมูล google sheet
+
+Link Demo OX (tic tac toe) : https://react-js-demo-ox.vercel.app
 
 <img src="https://img2.imgbiz.com/imgbiz/0cbc87db9d6423f56.png" />
 
