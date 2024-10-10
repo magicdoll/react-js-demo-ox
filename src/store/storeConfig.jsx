@@ -3,20 +3,20 @@ import { createSlice, configureStore } from "@reduxjs/toolkit"
 const initialState = {
   systemname: 'DemoOX',
   userinfo: {
-    id: 0,
-    linetoken: '',
     lineid: '',
     linename: '........',
     linestatus: '....',
     linepic: 'https://placehold.co/400x400',
-    score: 0
+    score: 0,
+    winarow: 0
   } ,
   isBattle: false,
   isRank: false,
   turnPlayer: true,
+  winarow: 0,
   playerColor: 'pink',
   botColor: 'green',
-  winarow: 0,
+  jsonalert: { color: '', point: 0, extrapoint: 0 },
   arrgameox: [
     { box: '1', chkby: '' },
     { box: '2', chkby: '' },
@@ -41,14 +41,23 @@ const storeConfig = createSlice({
       state.turnPlayer = payload
     },
     setWinaRow(state, { payload }) {
-      state.winarow = (payload <= 0 ? 0 : state.winarow++)
-      if (state.winarow >= 3) {
+      /* state.userinfo.winarow = (payload <= 0 ? 0 : (state.userinfo.winarow + 1)) */
+      state.winarow = (payload <= 0 ? 0 : (state.winarow + 1))
+      if (state.winarow >= 3 /* state.userinfo.winarow >= 3 */) {
         state.userinfo.score += 2
+        /* state.userinfo.winarow = 0 */
         state.winarow = 0
+        state.jsonalert.extrapoint = 1
       }
       else {
         state.userinfo.score += (state.userinfo.score >= 0 ? payload : 0)
       }
+
+      state.jsonalert.color = (payload < 0 ? 'red' : payload > 0 ? 'green' : 'blue')
+      state.jsonalert.point = payload
+    },
+    setClearAlert(state, {}) {
+      state.jsonalert = { color: '', point: 0, extrapoint: 0 }
     },
     setPlayerColor(state, { payload }) {
       state.playerColor = ''
@@ -85,7 +94,7 @@ const storeConfig = createSlice({
   }
 })
 
-export const { setUserInfo, setTurnPlayer, setWinaRow, setPlayerColor, setPlayOX, setClearArrOX } = storeConfig.actions
+export const { setUserInfo, setTurnPlayer, setWinaRow, setClearAlert, setPlayerColor, setPlayOX, setClearArrOX } = storeConfig.actions
 export default configureStore({
   reducer: storeConfig.reducer
 })
