@@ -39,14 +39,13 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(setClearAlert())
-    }, 3000)
+    }, 10000)
   }, [alertcolor])
 
   const fnInitLine = () => {
     liff.init({ liffId: liffidG }, () => {
       if (!liff.isLoggedIn()) {
         liff.login()
-        // fnUserSheetGetdata({ userId: 'U451d817606a772eaa59b013572ad0b5fasd' })
       }
       else {
         fnSetUserinfo()
@@ -247,7 +246,7 @@ const App = () => {
         </div>
 
         {/* bettle zone */}
-        <div className={`flex flex-col items-center pb-10 ${isBattle ? '' : 'hidden'}`}>
+        <div className={`flex flex-col items-center pb-4 ${isBattle ? '' : 'hidden'}`}>
           <div className="flex mb-4">
             <a href="#" onClick={() => { dispatch(setPlayerColor('pink')); }} className={`${playerColor === 'pink' ? 'outline-none z-10 ring-4 ring-gray-100' : ''} w-[50px] h-[50px] bg-pink-600 rounded-full inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 rounded-lg border border-gray-200`}></a>
             <a href="#" onClick={() => { dispatch(setPlayerColor('green')); }} className={`${playerColor === 'green' ? 'outline-none z-10 ring-4 ring-gray-100' : ''} w-[50px] h-[50px] bg-green-600 rounded-full py-2 px-4 ms-2 text-sm font-medium text-gray-900 rounded-lg border border-gray-200`}></a>
@@ -255,14 +254,14 @@ const App = () => {
           <div className="grid grid-cols-3 gap-2">
             {
               arrgameox.map((item, index) => 
-                <button key={index} type="button" disabled={!turnPlayer} onClick={() => { fnPlayOX(`${item.box}`) }} className={`${!turnPlayer && !item.chkby ? 'bg-gray-600' : !item.chkby ? 'bg-white dark:bg-gray-800' : item.chkby == 'player' ? `bg-${playerColor}-600` : `bg-${botColor}-600`} h-[80px] w-[80px] text-gray-900 border border-gray-300 font-medium rounded-lg text-sm dark:text-white dark:border-gray-600 `}></button>   
+                <button key={index} type="button" disabled={!turnPlayer || item.chkby} onClick={() => { fnPlayOX(`${item.box}`) }} className={`${!turnPlayer && !item.chkby ? 'bg-gray-600' : !item.chkby ? 'bg-white dark:bg-gray-800' : item.chkby == 'player' ? `bg-${playerColor}-600` : `bg-${botColor}-600`} h-[80px] w-[80px] text-gray-900 border border-gray-300 font-medium rounded-lg text-sm dark:text-white dark:border-gray-600 `}></button>   
               )
             }
           </div>
         </div>
 
         {/* rank zone */}
-        <div className={`flex flex-col items-center pb-10 ${isRank ? '' : 'hidden'}`}>
+        <div className={`flex flex-col items-center pb-4 ${isRank ? '' : 'hidden'}`}>
           <div className="w-full max-w-md px-2 py-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className="flow-root">
               <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
