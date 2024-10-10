@@ -50,7 +50,7 @@ const storeConfig = createSlice({
         state.jsonalert.extrapoint = 1
       }
       else {
-        state.userinfo.score += (state.userinfo.score >= 0 ? payload : 0)
+        state.userinfo.score += (state.userinfo.score > 0 || payload !== -1 ? payload : 0)
       }
 
       state.jsonalert.color = (payload < 0 ? 'red' : payload > 0 ? 'green' : 'blue')

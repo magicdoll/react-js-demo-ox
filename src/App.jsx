@@ -39,13 +39,13 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(setClearAlert())
-    }, 10000)
+    }, 3000)
   }, [alertcolor])
 
   const fnInitLine = () => {
     liff.init({ liffId: liffidG }, () => {
       if (!liff.isLoggedIn()) {
-        liff.login()
+        // liff.login()
         // fnUserSheetGetdata({ userId: 'U451d817606a772eaa59b013572ad0b5fasd' })
       }
       else {
@@ -68,9 +68,9 @@ const App = () => {
       arrUserSheet = await arrUserSheet.filter((item) => item.lineid == profile.userId)
       const jsuserinfo = {
         lineid: profile.userId,
-        linename: profile.displayName /*  || 'กรุณารอสักครู่..' */,
-        linestatus: profile.statusMessage /*  || 'I want to be the person you're scared to lose.' */,
-        linepic: profile.pictureUrl /*  || 'https://profile.line-scdn.net/0h7OJlG0mGaGBnFXpElfgWHxdFawpEZDFyGSBzVFsdNgAJJi80HCZ3BwIQNgdeJX0xQnsjDwBFN1NrBh8GeUOUVGAlNVFbIio0SXMujg' */,
+        linename: profile.displayName,
+        linestatus: profile.statusMessage,
+        linepic: profile.pictureUrl,
         score: 0,
         winarow: 0
       }
@@ -213,16 +213,6 @@ const App = () => {
 
   return (
     <div className='font-mitr text-sm'>
-      {/* alert */}
-      <div role="alert" className={jsonalert.color ? '' : 'hidden'}>
-        <div className={`bg-${jsonalert.color}-500 text-white font-bold rounded-t px-4 py-2`}>
-          <span>{jsonalert.color == 'red' ? 'Lose' : jsonalert.color == 'blue' ? 'Draw' : jsonalert.color == 'green' ? 'Win' : ''}</span>
-        </div>
-        <div className={`border border-t-0 border-${jsonalert.color}-400 rounded-b bg-blue-100 px-4 py-3 text-${jsonalert.color}-700`}>
-          <p>{`Point ${jsonalert.point < 0 ? jsonalert.point : `+${jsonalert.point}`} ${jsonalert.extrapoint ? ', Extra Point +1' : ''}`}</p>
-        </div>
-      </div>
-
       <div className="min-w-[330px] max-w-[340px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 px-6 py-2">
         {/* logout */}
         <div className="flex justify-end px-4 pt-4">
@@ -251,6 +241,11 @@ const App = () => {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                 <path d="M3 4.875C3 3.839 3.84 3 4.875 3h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5A1.875 1.875 0 0 1 3 9.375v-4.5ZM4.875 4.5a.375.375 0 0 0-.375.375v4.5c0 .207.168.375.375.375h4.5a.375.375 0 0 0 .375-.375v-4.5a.375.375 0 0 0-.375-.375h-4.5Zm7.875.375c0-1.036.84-1.875 1.875-1.875h4.5C20.16 3 21 3.84 21 4.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5a1.875 1.875 0 0 1-1.875-1.875v-4.5Zm1.875-.375a.375.375 0 0 0-.375.375v4.5c0 .207.168.375.375.375h4.5a.375.375 0 0 0 .375-.375v-4.5a.375.375 0 0 0-.375-.375h-4.5ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75A.75.75 0 0 1 6 7.5v-.75Zm9.75 0A.75.75 0 0 1 16.5 6h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75ZM3 14.625c0-1.036.84-1.875 1.875-1.875h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.035-.84 1.875-1.875 1.875h-4.5A1.875 1.875 0 0 1 3 19.125v-4.5Zm1.875-.375a.375.375 0 0 0-.375.375v4.5c0 .207.168.375.375.375h4.5a.375.375 0 0 0 .375-.375v-4.5a.375.375 0 0 0-.375-.375h-4.5Zm7.875-.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm6 0a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75ZM6 16.5a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm9.75 0a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm-3 3a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm6 0a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Z" />
               </svg>
+              {
+                ['green', 'blue', 'red'].map((cl) => 
+                  <div className={`${jsonalert.color == cl ? '' : 'hidden'} animate-bounce bg-${cl}-600 border-${cl}-800 absolute inline-flex items-center justify-center w-14 h-14 text-lg font-bold text-white border-2 border-white rounded-full -top-2 -end-2`}>{jsonalert.extrapoint ? '+2' : jsonalert.point < 0 ? jsonalert.point : `+${jsonalert.point}`}</div>    
+                )
+              }
             </button>
           </div>
         </div>
@@ -299,7 +294,7 @@ const App = () => {
           </div>
         </div>
 
-        {/* rank zone */}
+        {/* qr zone */}
         <div className={`flex flex-col items-center pb-4 ${isQr ? '' : 'hidden'}`}>
           <img src={'https://img2.pic.in.th/pic/QR-DemoOx.png'} />
           <a href="#" onClick={() => { window.open("https://lin.ee/Yhyyjv2"); }} >
