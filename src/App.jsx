@@ -11,6 +11,7 @@ const App = () => {
   const urlSheets = 'https://api.sheetbest.com/sheets/0cd97f0d-00cb-490c-a68a-79c0346fb722'
   const isNotLogin = false /* true [เอาไว้เทสเล่น] : ระบบจะไม่ทำการ loin line และไม่ยิง googel sheet */
 
+  const [isFirstHide, setIsFirstHide] = useState(true)
   const [isBattle, setIsBattle] = useState(false)
   const [isRank, setIsRank] = useState(false)
   const [isQr, setIsQr] = useState(false)
@@ -43,6 +44,7 @@ const App = () => {
     }, 10000)
   }, [alertcolor])
 
+  /* check login */
   const fnInitLine = () => {
     liff.init({ liffId: liffidG }, () => {
       if (!liff.isLoggedIn() && !isNotLogin) {
@@ -81,7 +83,7 @@ const App = () => {
         jsuserinfo.score = parseInt(arrUserSheet[0].score || 0)
         jsuserinfo.winarow = parseInt(arrUserSheet[0].winarow || 0)
       }
-
+      setIsFirstHide(false)
       dispatch(setUserInfo(jsuserinfo))
     }
     /* process rank */
@@ -122,7 +124,7 @@ const App = () => {
     }
   }
 
-  /* Auto Bot */
+  /* Auto Bot - Logic Auto Bot Play */
   const fnBotPlay = (box) => {
     let strbox = ''
     /* filter box bot checked */
@@ -213,7 +215,7 @@ const App = () => {
 
   return (
     <div className='font-mitr text-sm'>
-      <div className="min-w-[330px] max-w-[340px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 px-6 py-2">
+      <div className={`${isFirstHide && !isNotLogin ? 'hidden' : ''} min-w-[330px] max-w-[340px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 px-6 py-2`}>
         {/* logout */}
         <div className="flex justify-end px-4 pt-4">
           <button onClick={() => { liff.logout(); liff.login(); }} className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
@@ -300,7 +302,6 @@ const App = () => {
           </a>
         </div>
       </div>
-
     </div>
   )
 }
