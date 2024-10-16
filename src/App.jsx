@@ -41,7 +41,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(setClearAlert())
-    }, 10000)
+    }, 3000)
   }, [alertcolor])
 
   /* check login */
